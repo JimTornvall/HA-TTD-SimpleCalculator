@@ -67,3 +67,30 @@ func TestSimple_Add_Multiple_Numbers(t *testing.T) {
 		}
 	}
 }
+
+func TestSimple_Add_Special_Separator(t *testing.T) {
+	tests := []struct {
+		input string
+		want  int
+	}{
+		{"//.\n1.2.3", 6},
+		{"//B\n1B2B3B4", 10},
+		{"//;\n1;2;3;4;5", 15},
+		{"//;\n1;2;3;4;5;6", 21},
+		{"//;\n1;2;3;4;5;6;7", 28},
+		{"//;\n1;2;3;4;5;6;7;8", 36},
+		{"//sep\n1sep2sep3sep4sep5sep6sep7sep8", 36},
+		{"//\t\n1\t2\t3\t4\t5\t6\t7\t8\t9", 45},
+		{"//\t\n1\t2\t3\t4\t5\t6\t7\t8\t9\t10", 55},
+	}
+	for _, test := range tests {
+		calc := NewSimple()
+		result, err := calc.Add(test.input)
+		if err != nil {
+			t.Errorf("Error: %v", err)
+		}
+		if result != test.want {
+			t.Errorf("Want: %v, Got: %v", test.want, result)
+		}
+	}
+}
