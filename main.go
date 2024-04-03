@@ -1,7 +1,7 @@
 package main
 
 import (
-	"SimpelCalculator/pkg/calculator"
+	"SimpleCalculator/pkg/calculator"
 	"fmt"
 )
 
