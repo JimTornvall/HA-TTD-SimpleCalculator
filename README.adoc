@@ -1,0 +1,27 @@
+= SimpleCalculator
+:Author: Jim Törnvall
+:Year: 2024
+:School: Åland University of Applied Sciences
+:Course: Test Driven Development
+
+== Info
+This is a simple TDD project created for {Course} at {School} by {Author} in {Year}.
+
+== Setup
+[source,shell]
+----
+go mod tidy
+----
+
+== Run
+[source,shell]
+----
+go run .
+----
+
+== Test calculator package
+
+[source,shell]
+----
+go test -v .\pkg\calculator\
+----
