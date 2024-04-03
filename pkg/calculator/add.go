@@ -1,12 +1,20 @@
 package calculator
 
 import (
+	"errors"
 	"strconv"
 	"strings"
 )
 
 func split(r rune) bool {
 	return r == ',' || r == '\n'
+}
+
+func negativeNumber(num int) error {
+	if num < 0 {
+		return errors.New("Negatives not allowed: " + strconv.Itoa(num))
+	}
+	return nil
 }
 
 func (s *Simple) Add(numString string) (int, error) {
@@ -28,6 +36,12 @@ func (s *Simple) Add(numString string) (int, error) {
 			if err != nil {
 				return -1, err
 			}
+
+			err = negativeNumber(number)
+			if err != nil {
+				return -1, err
+			}
+
 			sum += number
 		}
 		return sum, nil
@@ -41,6 +55,10 @@ func (s *Simple) Add(numString string) (int, error) {
 			if err != nil {
 				return -1, err
 			}
+			err = negativeNumber(number)
+			if err != nil {
+				return -1, err
+			}
 			sum += number
 		}
 		return sum, nil
@@ -48,6 +66,10 @@ func (s *Simple) Add(numString string) (int, error) {
 
 	// Return the number if the input is a single number
 	num, err := strconv.Atoi(numString)
+	if err != nil {
+		return -1, err
+	}
+	err = negativeNumber(num)
 	if err != nil {
 		return -1, err
 	}

@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello")
+	fmt.Println("Not implemented yet!")
 	calc := calculator.NewSimple()
 	_ = calc
 }
