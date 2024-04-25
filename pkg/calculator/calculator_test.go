@@ -1,6 +1,7 @@
 package calculator
 
 import (
+	. "github.com/ovechkin-dm/mockio/mock"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
 	"testing"
@@ -17,7 +18,8 @@ type SimpleSuite struct {
 
 // SetupTest initializes the Simple calculator and logger before each test
 func (suite *SimpleSuite) SetupTest() {
-	suite.logger = NewSimpleLogger()
+	SetUp(suite.T())
+	suite.logger = Mock[Logger]()
 	suite.calc = NewSimple(suite.logger)
 }
 
@@ -131,4 +133,12 @@ func (suite *SimpleSuite) Test_Add_Multiple_Negative_Exceptions() {
 	for _, test := range tests {
 		HelperAddAndTestError(suite, test.input, test.want)
 	}
+}
+
+func (suite *SimpleSuite) Test_Add_Large_Numbers() {
+	input := "1001,2"
+	want := 1003
+
+	HelperAddAndTestResult(suite, input, want)
+	Verify(suite.logger, AtLeastOnce()).Log(1001)
 }

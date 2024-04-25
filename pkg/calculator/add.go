@@ -48,6 +48,7 @@ func (s *Simple) Add(numString string) (int, error) {
 				return -1, err
 			}
 
+			s.checkIfNumberIsOver1000(number)
 			sum += number
 		}
 		return sum, nil
@@ -65,6 +66,8 @@ func (s *Simple) Add(numString string) (int, error) {
 			if err != nil {
 				return -1, err
 			}
+
+			s.checkIfNumberIsOver1000(number)
 			sum += number
 		}
 		return sum, nil
@@ -79,5 +82,7 @@ func (s *Simple) Add(numString string) (int, error) {
 	if err != nil {
 		return -1, err
 	}
+
+	s.checkIfNumberIsOver1000(num)
 	return num, nil
 }

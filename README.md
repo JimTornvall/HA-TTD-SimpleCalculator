@@ -40,7 +40,6 @@ go test -v ./...
 
 ## TODO
 
-- Add more tests
-- Refactor all the duplicated code in the tests
+- One more test for the separator spec + newlines among the numbers
 - Refactor all the duplicated code in add.go
 - Build the actual calculator main.go
