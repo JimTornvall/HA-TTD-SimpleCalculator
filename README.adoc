@@ -3,6 +3,7 @@
 :Year: 2024
 :School: Åland University of Applied Sciences
 :Course: Test Driven Development
+:Status: image::https://github.com/JimTornvall/HA-TTD-SimpleCalculator/actions/workflows/go.yml/badge.svg[Go Build and Test]
 
 == Info
 This is a simple TDD project created for {Course} at {School} by {Author} in {Year}.
