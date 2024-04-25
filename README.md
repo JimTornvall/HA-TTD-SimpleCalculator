@@ -10,6 +10,16 @@
 
 This is a simple TDD project created for school.
 
+## Packages
+- Testify
+  - https://github.com/stretchr/testify
+  - Assert: Used for assertions in the tests
+  - Suite: Used for creating test suites, used to mimic @BeforeEach and @AfterEach in JUnit
+  - Mock: Isnt used as i like Mockio better
+- Mockio
+  - https://github.com/ovechkin-dm/mockio
+  - Mockito for golang, used for mocking interfaces in the tests
+
 ## Setup
 
 ```shell
@@ -22,10 +32,10 @@ go mod tidy
 go run
 ```
 
-## Test calculator package
+## Test 
 
 ```shell
-go test -v ./
+go test -v ./...
 ```
 
 ## TODO
