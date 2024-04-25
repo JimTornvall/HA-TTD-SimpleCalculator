@@ -1,7 +1,9 @@
 package calculator
 
-type Simple struct{}
+type Simple struct {
+	Logger
+}
 
-func NewSimple() Simple {
-	return Simple{}
+func NewSimple(logger Logger) Simple {
+	return Simple{logger}
 }

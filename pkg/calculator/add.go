@@ -17,6 +17,12 @@ func negativeNumber(num int) error {
 	return nil
 }
 
+func (s *Simple) checkIfNumberIsOver1000(num int) {
+	if num > 1000 {
+		s.Log(num)
+	}
+}
+
 func (s *Simple) Add(numString string) (int, error) {
 
 	// Return 0 if the input is empty

@@ -7,6 +7,6 @@ import (
 
 func main() {
 	fmt.Println("Not implemented yet!")
-	calc := calculator.NewSimple()
+	calc := calculator.NewSimple(calculator.NewSimpleLogger())
 	_ = calc
 }
