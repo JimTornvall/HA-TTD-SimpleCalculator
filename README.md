@@ -28,7 +28,7 @@ go run
 go test -v ./
 ```
 
-== TODO
+## TODO
 
 - Add more tests
 - Refactor all the duplicated code in the tests
