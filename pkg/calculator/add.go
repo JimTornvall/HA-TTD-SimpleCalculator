@@ -38,6 +38,7 @@ func (s *Simple) Add(numString string) (int, error) {
 		numArr := strings.Split(numString, delimiter)
 		sum := 0
 		for _, numberString := range numArr {
+			numberString = strings.TrimSpace(numberString)
 			number, err := strconv.Atoi(numberString)
 			if err != nil {
 				return -1, err

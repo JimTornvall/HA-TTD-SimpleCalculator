@@ -108,7 +108,7 @@ func (suite *MainSuite) Test_Main_Single_Number() {
 }
 
 func (suite *MainSuite) Test_Main_Multiple_Numbers() {
-	input := "1,2,3,4,5,6,7,8,9,10\n\n"
+	input := "1,2,3,4,5,\n6,7,8,9,10\n\n"
 	expected := HelperExpectedOutput(55)
 	reader := strings.NewReader(input)
 
@@ -121,7 +121,7 @@ func (suite *MainSuite) Test_Main_Multiple_Numbers() {
 }
 
 func (suite *MainSuite) Test_Main_Custom_Separator() {
-	input := "//sep\n1sep2sep3sep4sep5sep6sep7sep8sep9sep10\n\n"
+	input := "//sep\n1sep2sep3sep\n4sep5sep6sep7sep8sep9sep10\n\n"
 	expected := HelperExpectedOutput(55)
 	reader := strings.NewReader(input)
 
