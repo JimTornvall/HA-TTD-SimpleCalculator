@@ -2,8 +2,11 @@ package main
 
 import (
 	"SimpleCalculator/pkg/calculator"
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/suite"
+	"io"
+	"os"
 	"strings"
 	"testing"
 )
@@ -49,21 +52,70 @@ func HelperAddAndTestError(suite *MainSuite, input string, want string) {
 	assert.Equal(suite.T(), want, err.Error(), "Want: %v, Got: %v", want, err.Error())
 }
 
+func HelperCaptureOutput(f func()) (string, error) {
+	orig := os.Stdout
+	r, w, _ := os.Pipe()
+	os.Stdout = w
+	f()
+	os.Stdout = orig
+	err := w.Close()
+	if err != nil {
+		return "", err
+	}
+	out, _ := io.ReadAll(r)
+	return string(out), err
+}
+
+func HelperExpectedOutput(result int) string {
+	expected := fmt.Sprintf(`Welcome to the Simple Calculator! 🧮
+
+	Usage: Any numbers you write will be added together
+		Ex: 1,2,3,4	 will return 10
+		Ex: 1,2,3,4,5,6,7,8,9,10	 will return 55
+	You can also use a custom separator
+		Ex: //;<newline>1;2;3;4;5;6;7;8;9;10	 will return 55
+	Standard separators are: , and newline
+
+scalc: The result is %d
+`, result)
+	return expected
+}
+
 func (suite *MainSuite) Test_Main_No_Input() {
-	input := "\n\n"
+	input := "\n"
+	expected := HelperExpectedOutput(0)
 	reader := strings.NewReader(input)
-	NewCalc(reader, suite.calc)
 
-	// Output:
-	// Welcome to the Simple Calculator! 🧮
-	//
-	// 	Usage: Any numbers you write will be added together
-	// 		Ex: 1,2,3,4	 will return 10
-	// 		Ex: 1,2,3,4,5,6,7,8,9,10	 will return 55
-	// 	You can also use a custom separator
-	// 		Ex: //;<newline>1;2;3;4;5;6;7;8;9;10	 will return 55
-	// 	Standard separators are: , and newline
-	//
-	// scalc: The result is 0
+	output, err := HelperCaptureOutput(func() {
+		NewCalc(reader, suite.calc)
+	})
 
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), expected, output)
+}
+
+func (suite *MainSuite) Test_Main_Single_Number() {
+	input := "1\n\n"
+	expected := HelperExpectedOutput(1)
+	reader := strings.NewReader(input)
+
+	output, err := HelperCaptureOutput(func() {
+		NewCalc(reader, suite.calc)
+	})
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), expected, output)
+}
+
+func (suite *MainSuite) Test_Main_Multiple_Numbers() {
+	input := "1,2,3,4,5,6,7,8,9,10\n\n"
+	expected := HelperExpectedOutput(55)
+	reader := strings.NewReader(input)
+
+	output, err := HelperCaptureOutput(func() {
+		NewCalc(reader, suite.calc)
+	})
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), expected, output)
 }
