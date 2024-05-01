@@ -38,8 +38,4 @@ go run
 go test -v ./...
 ```
 
-## TODO
 
-- One more test for the separator spec + newlines among the numbers
-- Refactor all the duplicated code in add.go
-- Build the actual calculator main.go
