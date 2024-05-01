@@ -34,7 +34,7 @@ func (s *Simple) Add(numString string) (int, error) {
 		numString := strings.TrimPrefix(numString, "//")
 		delimiter := strings.Split(numString, "\n")[0]
 		numString = strings.TrimPrefix(numString, delimiter+"\n")
-		numString = strings.TrimPrefix(numString, "\n")
+		numString = strings.TrimSpace(numString)
 		numArr := strings.Split(numString, delimiter)
 		sum := 0
 		for _, numberString := range numArr {

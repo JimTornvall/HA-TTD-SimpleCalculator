@@ -119,3 +119,16 @@ func (suite *MainSuite) Test_Main_Multiple_Numbers() {
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), expected, output)
 }
+
+func (suite *MainSuite) Test_Main_Custom_Separator() {
+	input := "//sep\n1sep2sep3sep4sep5sep6sep7sep8sep9sep10\n\n"
+	expected := HelperExpectedOutput(55)
+	reader := strings.NewReader(input)
+
+	output, err := HelperCaptureOutput(func() {
+		NewCalc(reader, suite.calc)
+	})
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), expected, output)
+}
