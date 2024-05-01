@@ -132,3 +132,19 @@ func (suite *MainSuite) Test_Main_Custom_Separator() {
 	assert.Nil(suite.T(), err)
 	assert.Equal(suite.T(), expected, output)
 }
+
+// test for complex input with custom separators
+// input: ‘//[***][%%%]\n1***2%%%4’"
+// expected output: 7
+func (suite *MainSuite) Test_Main_Complex_Custom_Separator() {
+	input := "//[***][%%%]\n1***2%%%4\n\n"
+	expected := HelperExpectedOutput(7)
+	reader := strings.NewReader(input)
+
+	output, err := HelperCaptureOutput(func() {
+		NewCalc(reader, suite.calc)
+	})
+
+	assert.Nil(suite.T(), err)
+	assert.Equal(suite.T(), expected, output)
+}
